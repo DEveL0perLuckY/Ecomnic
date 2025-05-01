@@ -36,7 +36,7 @@ function Cards() {
             return prev + 1; 
           }
         });
-      }, 1000);
+      }, 3000);
       return () => clearInterval(interval);
     }
   }, [isHovered]);
