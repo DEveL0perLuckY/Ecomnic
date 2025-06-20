@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { ShoppingCart, Search, User, X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const NAV_LINKS = [
-  "Gaming Keyboards",
-  "Gaming Mouse",
-
-];
+const NAV_LINKS = ["Gaming Keyboards", "Gaming Mouse"];
 
 function Header() {
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -27,14 +23,14 @@ function Header() {
             to="/home"
             className="text-2xl font-bold tracking-tight transition-transform hover:scale-105"
           >
-            <span className="text-primary">Ecomnic</span>
+            <span className="text-primary">MouzeKart</span>
           </Link>
 
           <nav className="hidden lg:flex gap-8 font-medium">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link}
-                to={"/"+link}
+                to={"/" + link}
                 className="relative py-2 hover:text-primary transition-colors
                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
                   after:bg-primary after:transition-all hover:after:w-full"

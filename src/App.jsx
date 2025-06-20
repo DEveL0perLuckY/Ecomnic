@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NoMatchFoundPage from "./pages/NoMatchFoundPage";
 import HomeIndex from "./pages/HomePage/index";

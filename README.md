@@ -1,3 +1,5 @@
-tree equvalent command
-find . 
-# Ecomnic
+# MouzeKart
+
+git add .  
+git commit -m "MouzeKart setup complete"
+git push
