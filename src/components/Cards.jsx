@@ -5,19 +5,22 @@ const EXCLUSIVE_ITEMS = [
   {
     title: "Website Exclusive",
     subtitle: "Go Beyond Limits",
-    image: "https://fakeimg.pl/1200x400?text=Website+Exclusive&font=lobster&font_size=50",
+    image:
+      "https://kreo-tech.com/cdn/shop/files/Artboard_2_f1af12c0-ae60-4259-8f7d-93c655ff06bc.png?v=1749102264&width=3000",
     route: "/exclusive",
   },
   {
     title: "New Collection",
     subtitle: "Explore Premium Gear",
-    image: "https://fakeimg.pl/1200x400?text=New+Collection&font=lobster&font_size=50",
+    image:
+      "https://kreo-tech.com/cdn/shop/files/Artboard_2_copy.webp?v=1750083079&width=2400",
     route: "/newcollection",
   },
   {
     title: "Special Offers",
     subtitle: "Up to 50% Off",
-    image: "https://fakeimg.pl/1200x400?text=Special+Offers&font=lobster&font_size=50",
+    image:
+      "https://kreo-tech.com/cdn/shop/files/Desktop_Banner_9a98368d-39d4-443e-b4f6-f26ecf57cc8f.png?v=1748496148&width=3000",
     route: "/sales",
   },
 ];
@@ -33,10 +36,10 @@ function Cards() {
           if (prev === 2) {
             return 0;
           } else {
-            return prev + 1; 
+            return prev + 1;
           }
         });
-      }, 3000);
+      }, 2000);
       return () => clearInterval(interval);
     }
   }, [isHovered]);
@@ -63,16 +66,16 @@ function Cards() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-96 object-cover"
+                  className="w-full h-96"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
                 <div className="absolute left-8 top-1/2 -translate-y-1/2 text-white">
                   <h2 className="text-4xl font-bold mb-2">{item.title}</h2>
                   <p className="text-2xl">{item.subtitle}</p>
                 </div>
                 <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold">
                   Exclusive
-                </div>
+                </div> */}
               </Link>
             </div>
           ))}

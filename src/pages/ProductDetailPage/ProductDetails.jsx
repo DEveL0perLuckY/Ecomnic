@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { products } from "../../utils/data";
+import { doc, getDoc } from "firebase/firestore";
+import db from "../../firebase";
 
 function ProductDetails() {
   const { id } = useParams();
-  const product = products.find((p) => p.id == id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const docRef = doc(db, "products", id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setProduct({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setProduct(null); // Not found
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        setProduct(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="p-8 text-center">
+        <h1 className="text-xl text-gray-600">Loading product details...</h1>
+      </div>
+    );
+  }
 
   if (!product) {
     return (

@@ -1,10 +1,28 @@
-import React from "react";
-import { products } from "../../utils/data";
+import React, { useEffect, useState } from "react";
+// import { products } from "../../utils/data";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Cards from "../../components/Cards";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../../firebase";
 
 function HomePage() {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productsCol = collection(db, "products");
+      const productSnapshot = await getDocs(productsCol);
+      const productList = productSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log("product list", productList);
+      setProducts(productList);
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-8">
