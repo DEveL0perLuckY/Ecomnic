@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import slide1 from "../assets/slide1.png";
+import slide2 from "../assets/slide2.png";
+import slide3 from "../assets/slide3.png";
+
 const EXCLUSIVE_ITEMS = [
   {
     title: "Website Exclusive",
     subtitle: "Go Beyond Limits",
-    image:
-      "https://kreo-tech.com/cdn/shop/files/Artboard_2_f1af12c0-ae60-4259-8f7d-93c655ff06bc.png?v=1749102264&width=3000",
-    route: "/exclusive",
+    image: slide1,
+    route: "/gamingKeyboard",
   },
   {
     title: "New Collection",
     subtitle: "Explore Premium Gear",
-    image:
-      "https://kreo-tech.com/cdn/shop/files/Artboard_2_copy.webp?v=1750083079&width=2400",
-    route: "/newcollection",
+    image: slide2,
+    route: "/gamingMouse",
   },
   {
     title: "Special Offers",
     subtitle: "Up to 50% Off",
-    image:
-      "https://kreo-tech.com/cdn/shop/files/Desktop_Banner_9a98368d-39d4-443e-b4f6-f26ecf57cc8f.png?v=1748496148&width=3000",
-    route: "/sales",
+    image: slide3,
+    route: "/product/edkCfAGZdXX8FdVdd7Rl",
   },
 ];
 

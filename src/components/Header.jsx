@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { ShoppingCart, Search, User, X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const NAV_LINKS = ["Gaming Keyboards", "Gaming Mouse"];
+const NAV_LINKS = {
+  "Gaming Keyboards": "gamingKeyboard",
+  "Gaming Mouse": "gamingMouse",
+};
+
 
 function Header() {
   const [isSearchOpen, setSearchOpen] = useState(false);
@@ -27,15 +31,15 @@ function Header() {
           </Link>
 
           <nav className="hidden lg:flex gap-8 font-medium">
-            {NAV_LINKS.map((link) => (
+            {Object.entries(NAV_LINKS).map(([label, route]) => (
               <Link
-                key={link}
-                to={"/" + link}
+                key={label}
+                to={`/${route}`}
                 className="relative py-2 hover:text-primary transition-colors
                   after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] 
                   after:bg-primary after:transition-all hover:after:w-full"
               >
-                {link}
+                {label}
               </Link>
             ))}
           </nav>
@@ -88,13 +92,13 @@ function Header() {
           className={`lg:hidden overflow-hidden transition-all duration-300
           ${isMenuOpen ? "max-h-96 pt-4" : "max-h-0"}`}
         >
-          {NAV_LINKS.map((link) => (
+          {Object.entries(NAV_LINKS).map(([label, route]) => (
             <Link
-              key={link}
-              to="#"
+              key={label}
+              to={`/${route}`}
               className="block py-3 px-4 hover:bg-gray-50 rounded-md transition-colors"
             >
-              {link}
+              {label}
             </Link>
           ))}
         </nav>
