@@ -1,5 +1,5 @@
 # MouzeKart
 
 git add .  
-git commit -m "MouzeKart firebase auth started"
+git commit -m "MouzeKart redux added"
 git push
