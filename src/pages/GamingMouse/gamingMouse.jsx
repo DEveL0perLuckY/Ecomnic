@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
-import db from "../../firebase";
+import { db } from "../../firebase";
 
 function GamingMouse() {
   const [products, setProducts] = useState([]);

@@ -45,27 +45,7 @@ function Header() {
           </nav>
 
           <div className="flex items-center gap-6">
-            <div className="relative flex items-center">
-              <button
-                onClick={() => setSearchOpen(!isSearchOpen)}
-                className="p-2 hover:text-primary transition-colors"
-              >
-                {isSearchOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Search className="w-5 h-5" />
-                )}
-              </button>
-              <input
-                type="text"
-                placeholder="Search products..."
-                className={`absolute right-0 top-full mt-1 w-64 px-4 py-2 border rounded-md shadow-sm
-                  transition-all duration-300 ${
-                    isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible"
-                  }`}
-              />
-            </div>
-
+            
             <Link
               to="/profile"
               className="p-2 hover:text-primary transition-transform hover:scale-110"

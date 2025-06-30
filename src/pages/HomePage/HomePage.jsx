@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import { products } from "../../utils/data";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import Cards from "../../components/Cards";
 import { collection, getDocs } from "firebase/firestore";
-import db from "../../firebase";
+import { db } from "../../firebase";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -16,7 +15,6 @@ function HomePage() {
         id: doc.id,
         ...doc.data(),
       }));
-      console.log("product list", productList);
       setProducts(productList);
     };
 

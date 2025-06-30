@@ -1,5 +1,5 @@
 # MouzeKart
 
 git add .  
-git commit -m "MouzeKart redux added"
+git commit -m "auth added"
 git push
