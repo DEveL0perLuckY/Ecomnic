@@ -1,16 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingCart, Search, User, X, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { useAuth } from "../context/AuthContext";
+import { db } from "../firebase";
 
 const NAV_LINKS = {
   "Gaming Keyboards": "gamingKeyboard",
   "Gaming Mouse": "gamingMouse",
 };
 
-
 function Header() {
-  const [isSearchOpen, setSearchOpen] = useState(false);
+  const { user } = useAuth();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCartCount = async () => {
+      if (!user) return;
+
+      try {
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        if (userSnap.exists()) {
+          const cart = userSnap.data().cart || [];
+          const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+          setCartCount(totalItems);
+        }
+      } catch (err) {
+        console.error("Failed to fetch cart count:", err);
+        setCartCount(0);
+      }
+    };
+
+    fetchCartCount();
+  }, [user]);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -45,7 +69,6 @@ function Header() {
           </nav>
 
           <div className="flex items-center gap-6">
-            
             <Link
               to="/profile"
               className="p-2 hover:text-primary transition-transform hover:scale-110"
@@ -58,19 +81,22 @@ function Header() {
               className="p-2 relative hover:text-primary transition-transform hover:scale-110"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span
-                className="absolute top-0 right-0 text-xs bg-accent text-white 
-                w-4 h-4 flex items-center justify-center rounded-full animate-bounce"
-              >
-                8
-              </span>
+              {cartCount > 0 && (
+                <span
+                  className="absolute -top-1 -right-1 text-[10px] bg-red-500 text-white 
+                  w-4 h-4 flex items-center justify-center rounded-full"
+                >
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </div>
         </div>
 
         <nav
-          className={`lg:hidden overflow-hidden transition-all duration-300
-          ${isMenuOpen ? "max-h-96 pt-4" : "max-h-0"}`}
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
+            isMenuOpen ? "max-h-96 pt-4" : "max-h-0"
+          }`}
         >
           {Object.entries(NAV_LINKS).map(([label, route]) => (
             <Link

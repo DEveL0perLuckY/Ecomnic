@@ -4,6 +4,7 @@ import { Mail, Lock, LogIn, UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import googleIcon from "../../assets/g.png";
 import user from "../../assets/user.png";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const { signInWithEmail, signInWithGoogle } = useAuth();
@@ -16,7 +17,7 @@ const SignInPage = () => {
     try {
       await signInWithEmail(email, password);
     } catch (err) {
-      alert(err.message);
+      toast.error(err.message);
     }
   };
 
@@ -26,7 +27,7 @@ const SignInPage = () => {
         <div className="flex items-center justify-center mb-6">
           <img src={user} alt="user" className="w-8 h-8 mr-2" />
 
-          <h2 className="text-2xl font-bold ml-2">Sign In</h2>
+          <h2 className="text-2xl font-bold">Sign In</h2>
         </div>
 
         <form onSubmit={handleEmailSignIn} className="space-y-4">
