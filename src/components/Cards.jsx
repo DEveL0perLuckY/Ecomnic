@@ -5,49 +5,47 @@ import slide1 from "../assets/slide1.png";
 import slide2 from "../assets/slide2.png";
 import slide3 from "../assets/slide3.png";
 
-const EXCLUSIVE_ITEMS = [
-  {
-    title: "Website Exclusive",
-    subtitle: "Go Beyond Limits",
-    image: slide1,
-    route: "/gamingKeyboard",
-  },
-  {
-    title: "New Collection",
-    subtitle: "Explore Premium Gear",
-    image: slide2,
-    route: "/gamingMouse",
-  },
-  {
-    title: "Special Offers",
-    subtitle: "Up to 50% Off",
-    image: slide3,
-    route: "/product/edkCfAGZdXX8FdVdd7Rl",
-  },
-];
+import slide1Mobile from "../assets/slide1Mobile.png";
+import slide2Mobile from "../assets/slide2Mobile.png";
+import slide3Mobile from "../assets/slide3Mobile.png";
+import useIsMobile from "../hooks/useIsMobile";
 
 function Cards() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
+
+  const EXCLUSIVE_ITEMS = [
+    {
+      title: "Website Exclusive",
+      subtitle: "Go Beyond Limits",
+      image: isMobile ? slide1Mobile : slide1,
+      route: "/gamingKeyboard",
+    },
+    {
+      title: "New Collection",
+      subtitle: "Explore Premium Gear",
+      image: isMobile ? slide2Mobile : slide2,
+      route: "/gamingMouse",
+    },
+    {
+      title: "Special Offers",
+      subtitle: "Up to 50% Off",
+      image: isMobile ? slide3Mobile : slide3,
+      route: "/product/edkCfAGZdXX8FdVdd7Rl",
+    },
+  ];
 
   useEffect(() => {
     if (!isHovered) {
       const interval = setInterval(() => {
-        setCurrentSlide((prev) => {
-          if (prev === 2) {
-            return 0;
-          } else {
-            return prev + 1;
-          }
-        });
+        setCurrentSlide((prev) => (prev === 2 ? 0 : prev + 1));
       }, 2000);
       return () => clearInterval(interval);
     }
   }, [isHovered]);
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
+  const goToSlide = (index) => setCurrentSlide(index);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -56,7 +54,6 @@ function Cards() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {" "}
         <div
           className="flex transition-transform duration-700 ease-in-out h-full w-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -67,20 +64,14 @@ function Cards() {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-96"
+                  className="w-full h-96 object-cover"
                 />
-                {/* <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
-                <div className="absolute left-8 top-1/2 -translate-y-1/2 text-white">
-                  <h2 className="text-4xl font-bold mb-2">{item.title}</h2>
-                  <p className="text-2xl">{item.subtitle}</p>
-                </div>
-                <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-full text-sm font-bold">
-                  Exclusive
-                </div> */}
               </Link>
             </div>
           ))}
         </div>
+
+        {/* Indicators */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
           {EXCLUSIVE_ITEMS.map((_, index) => (
             <button
